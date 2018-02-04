@@ -65,7 +65,7 @@ def choose_car(cars):
 def add_new_km(cars):
     select_vehicle = choose_car(cars)
 
-    print "Vehicle selected: %s %s with %s km." % (select_vehicle.brand, select_vehicle.model, select_vehicle.km_done)
+    print "Vehicle selected: %s %s with %s km." % (select_vehicle.c_manufacturer, select_vehicle.c_model, select_vehicle.km_driven)
     print ""
     new_km_str = raw_input("How many kilometers would you like to add to the existing ones? (enter only a number) ")
     print ""
@@ -75,6 +75,16 @@ def add_new_km(cars):
         new_km = float(new_km_str)
 
         select_vehicle.add_km(new_km)
-        print "New number of kilometers for %s %s is now: %s." % (select_vehicle.brand, select_vehicle.model, select_vehicle.km_done)
+        print "New number of kilometers for %s %s is now: %s." % (select_vehicle.c_manufacturer, select_vehicle.c_model, select_vehicle.km_driven)
     except ValueError:
         print "Please enter just a number for the kilometers you'd like to add."
+
+def change_service_date(cars):
+    select_vehicle = choose_car(cars)
+
+    print "Vehicle selected: %s %s with service date: %s." % (select_vehicle.c_manufacturer, select_vehicle.c_model, select_vehicle.service)
+    print ""
+    new_service_date = raw_input("What is the new service date for this vehicle? (DD.MM.YYYY) ")
+    print ""
+    select_vehicle.update_service_date(new_date=new_service_date)
+    print "Service date updated!"
