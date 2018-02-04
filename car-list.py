@@ -8,6 +8,12 @@ class Car(object):
     def full_name(self):
         return self.c_manufacturer + ' ' + self.c_model
 
+    def add_km(self, new_km):
+        self.km_driven += new_km  # this is the same as km_done = km_done + new_km. It adds new_km number to the existing km_done
+
+    def update_service_date(self, new_date):
+        self.service = new_date
+
 # opel = Car(c_manufacturer='Opel', c_model='Corsa', km_driven=120000, service="14/07/2017")
 # mercedes = Car(c_manufacturer='Mercedes', c_model='B', km_driven=100000, service="25/03/2017")
 # peugeot = Car(c_manufacturer='Peugeot', c_model='208', km_driven=80000, service="13/04/2017")
@@ -88,3 +94,52 @@ def change_service_date(cars):
     print ""
     select_vehicle.update_service_date(new_date=new_service_date)
     print "Service date updated!"
+
+def save(cars):
+    with open("cars.txt", "w+") as car_file:
+        for car in cars:
+            car_file.write("%s,%s,%s,%s\n" % (car.c_manufacturer, car.c_model, car.km_driven, car.service))
+
+def main():
+    print "Welcome to the Car Manager program."
+
+    cars = []
+
+    with open("cars.txt", "w+") as car_file:
+        for line in car_file:
+            try:
+                c_manufacturer, c_model, km_driven_str, service = line.split(",")
+                create_car_object(c_manufacturer, c_model, km_driven_str, service, cars)
+            except ValueError:
+                continue
+
+        while True:
+            print ""
+            print "Please pick one of the following options:"
+            print "1) See a list of all the company vehicles."
+            print "2) Add new vehicle."
+            print "3) Edit the kilometers done for the chosen vehicle."
+            print "4) Edit the last service date for the chosen vehicle."
+            print "5) Quit the program."
+            print ""
+
+            choice = int(raw_input("Which option would you like to choose? (1, 2, 3, 4, 5) "))
+            print ""
+
+            if choice == 1:
+                car_list(cars)
+            elif choice == 2:
+                add_new_car(cars)
+            elif choice == 3:
+                add_new_km(cars)
+            elif choice == 4:
+                change_service_date(cars)
+            elif choice == 5:
+                print "Thank you for using the Car Manager!"
+                save(cars)
+                break
+            else:
+                print "Please type just numbers from option 1 to 5"
+
+if __name__ == "__main__":
+    main()
