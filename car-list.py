@@ -9,31 +9,18 @@ class Car(object):
         return self.c_manufacturer + ' ' + self.c_model
 
     def add_km(self, new_km):
-        self.km_driven += new_km  # this is the same as km_done = km_done + new_km. It adds new_km number to the existing km_done
+        self.km_driven += new_km
 
     def update_service_date(self, new_date):
         self.service = new_date
-
-# opel = Car(c_manufacturer='Opel', c_model='Corsa', km_driven=120000, service="14/07/2017")
-# mercedes = Car(c_manufacturer='Mercedes', c_model='B', km_driven=100000, service="25/03/2017")
-# peugeot = Car(c_manufacturer='Peugeot', c_model='208', km_driven=80000, service="13/04/2017")
-# fiat = Car(c_manufacturer='Fiat', c_model='500', km_driven=8000, service="22/07/2017")
-#
-# car_list = [opel, mercedes, peugeot, fiat]
-#
-# for car in car_list:
-#     print car.full_name()
-#     print car.km_driven
-#     print car.service
-#     print ' '
 
 def car_list(cars):
     if cars == []:
         print "There aren't any cars in your list. Please add some."
     else:
         for index, car in enumerate(cars):
-            print "%s) %s %s with %s km driven so far. Last service date: %s" % (index+1, car.car_manufacturer, car.car_model,
-                                                                                 car.kilometres_driven, car.last_service)
+            print "%s) %s %s with %s km driven so far. Last service date: %s" % (index+1, car.c_manufacturer, car.c_model,
+                                                                                 car.km_driven, car.service)
 def create_car_object(c_manufacturer, c_model, km_driven_str, service, cars):
     try:
         km_driven_str = km_driven_str.replace(",", ".")
