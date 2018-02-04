@@ -28,3 +28,15 @@ def car_list(cars):
         for index, car in enumerate(cars):
             print "%s) %s %s with %s km driven so far. Last service date: %s" % (index+1, car.car_manufacturer, car.car_model,
                                                                                  car.kilometres_driven, car.last_service)
+def create_vehicle_object(c_manufacturer, c_model, km_driven_str, service, cars):
+    try:
+        km_driven_str = km_driven_str.replace(",", ".")
+        km_driven = float(km_driven_str)
+
+        new_car = Car(c_manufacturer=c_manufacturer, c_model=c_model, km_driven=km_driven, service=service)
+
+        cars.append(new_car)
+
+        return True
+    except ValueError:
+        return False
