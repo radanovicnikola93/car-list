@@ -8,18 +8,18 @@ class Car(object):
     def full_name(self):
         return self.c_manufacturer + ' ' + self.c_model
 
-opel = Car(c_manufacturer='Opel', c_model='Corsa', km_driven=120000, service="14/07/2017")
-mercedes = Car(c_manufacturer='Mercedes', c_model='B', km_driven=100000, service="25/03/2017")
-peugeot = Car(c_manufacturer='Peugeot', c_model='208', km_driven=80000, service="13/04/2017")
-fiat = Car(c_manufacturer='Fiat', c_model='500', km_driven=8000, service="22/07/2017")
-
-car_list = [opel, mercedes, peugeot, fiat]
-
-for car in car_list:
-    print car.full_name()
-    print car.km_driven
-    print car.service
-    print ' '
+# opel = Car(c_manufacturer='Opel', c_model='Corsa', km_driven=120000, service="14/07/2017")
+# mercedes = Car(c_manufacturer='Mercedes', c_model='B', km_driven=100000, service="25/03/2017")
+# peugeot = Car(c_manufacturer='Peugeot', c_model='208', km_driven=80000, service="13/04/2017")
+# fiat = Car(c_manufacturer='Fiat', c_model='500', km_driven=8000, service="22/07/2017")
+#
+# car_list = [opel, mercedes, peugeot, fiat]
+#
+# for car in car_list:
+#     print car.full_name()
+#     print car.km_driven
+#     print car.service
+#     print ' '
 
 def car_list(cars):
     if cars == []:
@@ -62,3 +62,19 @@ def choose_car(cars):
     selection = raw_input("What vehicle number would you like to choose? ")
     return cars[int(selection) - 1]
 
+def add_new_km(cars):
+    select_vehicle = choose_car(cars)
+
+    print "Vehicle selected: %s %s with %s km." % (select_vehicle.brand, select_vehicle.model, select_vehicle.km_done)
+    print ""
+    new_km_str = raw_input("How many kilometers would you like to add to the existing ones? (enter only a number) ")
+    print ""
+
+    try:
+        new_km_str = new_km_str.replace(",", ".")
+        new_km = float(new_km_str)
+
+        select_vehicle.add_km(new_km)
+        print "New number of kilometers for %s %s is now: %s." % (select_vehicle.brand, select_vehicle.model, select_vehicle.km_done)
+    except ValueError:
+        print "Please enter just a number for the kilometers you'd like to add."
