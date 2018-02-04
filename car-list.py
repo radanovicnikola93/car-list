@@ -1,12 +1,12 @@
 class Car(object):
     def __init__(self, c_manufacturer, c_model, km_driven, service):
-        self.car_manufacturer = c_manufacturer
-        self.car_model = c_model
-        self.kilometres_driven = km_driven
-        self.last_service = service
+        self.c_manufacturer = c_manufacturer
+        self.c_model = c_model
+        self.km_driven = km_driven
+        self.service = service
 
     def full_name(self):
-        return self.car_manufacturer + ' ' + self.car_model
+        return self.c_manufacturer + ' ' + self.c_model
 
 opel = Car(c_manufacturer='Opel', c_model='Corsa', km_driven=120000, service="14/07/2017")
 mercedes = Car(c_manufacturer='Mercedes', c_model='B', km_driven=100000, service="25/03/2017")
@@ -17,9 +17,14 @@ car_list = [opel, mercedes, peugeot, fiat]
 
 for car in car_list:
     print car.full_name()
-    print car.kilometres_driven
-    print car.last_service
+    print car.km_driven
+    print car.service
     print ' '
 
-
-
+def car_list(cars):
+    if cars == []:
+        print "There aren't any cars in your list. Please add some."
+    else:
+        for index, car in enumerate(cars):
+            print "%s) %s %s with %s km driven so far. Last service date: %s" % (index+1, car.car_manufacturer, car.car_model,
+                                                                                 car.kilometres_driven, car.last_service)
